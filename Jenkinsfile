@@ -29,9 +29,15 @@ pipeline {
             }
         }
 
+        stage('Manual Approval') {
+            steps {
+                input message: "Approve deployment to PRODUCTION?"
+            }
+        }
+
         stage('Upload to S3') {
             when {
-                branch 'dev'
+                branch 'prod'
             }
             steps {
                 sh 'aws s3 sync dist/ s3://$S3_BUCKET/ --delete'
@@ -53,10 +59,15 @@ pipeline {
     }
 
     post {
+        success {
+            mail to: 'hi@thedevbranch.com',
+                 subject: "✅ Production Build Success: ${env.BRANCH_NAME}",
+                 body: "The production build and deployment were successful."
+        }
         failure {
             mail to: 'hi@thedevbranch.com',
-                 subject: "React Dev Build Failed: ${env.BRANCH_NAME}",
-                 body: "Build failed. Check Jenkins logs."
+                 subject: "❌ Production Build Failed: ${env.BRANCH_NAME}",
+                 body: "Something went wrong in production pipeline. Check Jenkins logs."
         }
     }
 }
