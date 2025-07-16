@@ -1,8 +1,7 @@
 pipeline {
     agent any
     environment {
-        S3_BUCKET = "my-frontend-app-${env.BRANCH_NAME}"
-        DISTRIBUTION_ID = credentials('cloudfront-distribution-id') // optional
+        S3_BUCKET = "myfrontendartifact12212232"
     }
 
     tools {
@@ -35,19 +34,6 @@ pipeline {
             }
             steps {
                 sh 'aws s3 sync dist/ s3://$S3_BUCKET/ --delete'
-            }
-        }
-
-        stage('Invalidate CloudFront') {
-            when {
-                branch 'dev'
-            }
-            steps {
-                sh '''
-                    aws cloudfront create-invalidation \
-                      --distribution-id $DISTRIBUTION_ID \
-                      --paths "/*"
-                '''
             }
         }
     }
