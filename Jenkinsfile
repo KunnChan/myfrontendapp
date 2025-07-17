@@ -13,9 +13,12 @@ pipeline {
 
         stage('Install & Build') {
             steps {
-                sh 'node -v'
-                sh 'npm install'
-                sh 'npm run build'
+                timeout(time: 5, unit: 'MINUTES') {
+                    sh 'node -v'
+                    sh 'npm install'
+                    sh 'npm run build'
+                }
+                
             }
         }
 
