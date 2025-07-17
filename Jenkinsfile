@@ -4,10 +4,6 @@ pipeline {
         S3_BUCKET = "myfrontendartifact12212232"
     }
 
-    tools {
-        nodejs 'NodeJS 22'
-    }
-
     stages {
         stage('Checkout') {
             steps {
@@ -17,6 +13,7 @@ pipeline {
 
         stage('Install & Build') {
             steps {
+                sh 'node -v'
                 sh 'npm install'
                 sh 'npm run build'
             }
