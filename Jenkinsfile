@@ -1,7 +1,7 @@
 pipeline {
     agent any
     environment {
-        S3_BUCKET = "myfrontendartifact12212232"
+        S3_BUCKET = "myreactapp-${env.BRANCH_NAME}"
     }
 
     stages {

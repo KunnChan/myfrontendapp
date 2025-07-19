@@ -9,26 +9,16 @@ Useful commands:
 ```bash
 # npm 7+, extra double-dash is needed:
 npm create vite@latest myfrontednapp -- --template react
+
+cat /var/log/userdata.log
+
+sudo cat /var/lib/jenkins/secrets/initialAdminPassword
+
 ```
 
-# 1. Update the system
+403 error
 
-sudo yum update -y
+Security > Enable Security Proxy
 
-# 2. Install Java 21 (Amazon Corretto 21)
-
-sudo yum install java-21-amazon-corretto -y
-
-# 3. Add Jenkins repo and import GPG key
-
-sudo wget -O /etc/yum.repos.d/jenkins.repo https://pkg.jenkins.io/redhat-stable/jenkins.repo
-sudo rpm --import https://pkg.jenkins.io/redhat-stable/jenkins.io.key
-
-# 4. Install Jenkins
-
-sudo yum install jenkins -y
-
-# 5. Start and enable Jenkins
-
-sudo systemctl start jenkins
-sudo systemctl enable jenkins
+https://accounts.zoho.com/home#security/security_pwd
+https://www.zoho.com/mail/help/adminconsole/two-factor-authentication.html#password
