@@ -1,7 +1,7 @@
 pipeline {
     agent any
     environment {
-        S3_BUCKET = "myreactapp-${env.BRANCH_NAME}"
+        S3_BUCKET = "myreactapp-34344545-${env.BRANCH_NAME}"
         TO_EMAIL = "hi@thedevbranch.com"
     }
 
@@ -41,7 +41,7 @@ pipeline {
 
     post {
         failure {
-            mail to: '$TO_EMAIL',
+            mail to: "${TO_EMAIL}",
                  subject: "React Dev Build Failed: ${env.BRANCH_NAME}",
                  body: "Build failed. Check Jenkins logs."
         }
