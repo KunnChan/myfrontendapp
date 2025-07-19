@@ -16,9 +16,29 @@ sudo cat /var/lib/jenkins/secrets/initialAdminPassword
 
 ```
 
-403 error
+### Common Error
 
-Security > Enable Security Proxy
+- Jenkins 403 error
 
-https://accounts.zoho.com/home#security/security_pwd
-https://www.zoho.com/mail/help/adminconsole/two-factor-authentication.html#password
+  - Go to Security > Enable Security Proxy
+
+- Zoho Create New App Guide
+  https://accounts.zoho.com/home#security/security_pwd
+  https://www.zoho.com/mail/help/adminconsole/two-factor-authentication.html#password
+
+- GitHub Personal Token
+
+  - Go to GitHub → Settings → Developer settings → Personal access tokens (Classic)
+  - Scope: repo, admin:repo_hook
+
+- Add Webhook in GitHub Repo
+
+  - Go to your GitHub repository
+  - Click Settings → Webhooks
+  - Click “Add webhook”
+
+  - Payload URL http://<jenkins-server>:8080/github-webhook/
+  - Content type application/json
+  - Secret (optional — match in Jenkins if used)
+  - Events Choose: Just the push event
+  - Click “Add webhook”
