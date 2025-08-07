@@ -27,7 +27,7 @@ jobs:
 
       - name: Set PR bucket, configure static website, and deploy to S3
         run: |
-          BUCKET_NAME=myapp-pr-${{ github.event.pull_request.number }}-preview
+          BUCKET_NAME=thedevbranch.com-pr-${{ github.event.pull_request.number }}-preview
           echo "PREVIEW_BUCKET=$BUCKET_NAME" >> $GITHUB_ENV
 
           # Create bucket if not exists
@@ -59,6 +59,10 @@ jobs:
 
           # Sync build output
           aws s3 sync ./dist/ s3://$BUCKET_NAME --delete
+        env:
+          AWS_REGION: ap-southeast-1
+          AWS_ACCESS_KEY_ID: ${{ secrets.AWS_ACCESS_KEY_ID }}
+          AWS_SECRET_ACCESS_KEY: ${{ secrets.AWS_SECRET_ACCESS_KEY }}
 
       - name: Comment Preview URL
         uses: actions/github-script@v6
@@ -73,6 +77,8 @@ jobs:
         env:
           AWS_REGION: ap-southeast-1
           PREVIEW_BUCKET: ${{ env.PREVIEW_BUCKET }}
+          AWS_ACCESS_KEY_ID: ${{ secrets.AWS_ACCESS_KEY_ID }}
+          AWS_SECRET_ACCESS_KEY: ${{ secrets.AWS_SECRET_ACCESS_KEY }}
 
   cleanup-preview:
     if: github.event_name == 'pull_request' && github.event.action == 'closed' && github.event.pull_request.merged == false
