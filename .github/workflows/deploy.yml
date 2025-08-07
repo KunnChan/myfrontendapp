@@ -10,8 +10,8 @@ jobs:
       - name: Check for changes in build output
         id: changes
         run: |
-          git fetch origin main
-          CHANGED=$(git diff --name-only HEAD origin/main -- dist/)
+          git fetch origin dev
+          CHANGED=$(git diff --name-only HEAD origin/dev -- dist/)
           echo "changed_files=$CHANGED" >> $GITHUB_OUTPUT
 
       - name: Checkout Code
