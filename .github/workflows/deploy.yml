@@ -36,6 +36,11 @@ jobs:
             --region ap-southeast-1 \
             --create-bucket-configuration LocationConstraint=ap-southeast-1 || true
 
+          # ❗ Disable Block Public Access settings
+          aws s3api put-public-access-block \
+            --bucket $BUCKET_NAME \
+            --public-access-block-configuration 'BlockPublicAcls=false,IgnorePublicAcls=false,BlockPublicPolicy=false,RestrictPublicBuckets=false'
+
           # Enable static website hosting
           aws s3 website s3://$BUCKET_NAME/ --index-document index.html --error-document index.html
 
