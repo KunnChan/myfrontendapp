@@ -90,7 +90,7 @@ jobs:
           AWS_SECRET_ACCESS_KEY: ${{ secrets.AWS_SECRET_ACCESS_KEY }}
 
   cleanup-preview:
-    if: github.event_name == 'pull_request' && github.event.action == 'closed' && github.event.pull_request.merged == false
+    if: github.event_name == 'pull_request' && github.event.action == 'closed'
     runs-on: ubuntu-latest
     steps:
       - name: Delete PR Preview Bucket
