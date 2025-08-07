@@ -42,3 +42,5 @@ sudo cat /var/lib/jenkins/secrets/initialAdminPassword
   - Secret (optional — match in Jenkins if used)
   - Events Choose: Just the push event
   - Click “Add webhook”
+
+  http://ec2-47-129-151-18.ap-southeast-1.compute.amazonaws.com:8080/github-webhook/
