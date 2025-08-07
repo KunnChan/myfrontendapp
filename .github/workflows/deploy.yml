@@ -7,13 +7,6 @@ jobs:
   deploy:
     runs-on: ubuntu-latest
     steps:
-      - name: Check for changes in build output
-        id: changes
-        run: |
-          git fetch origin dev
-          CHANGED=$(git diff --name-only HEAD origin/dev -- dist/)
-          echo "changed_files=$CHANGED" >> $GITHUB_OUTPUT
-
       - name: Checkout Code
         uses: actions/checkout@v3
 
@@ -27,6 +20,13 @@ jobs:
 
       - name: Build App
         run: npm run build
+
+      - name: Check for changes in build output
+        id: changes
+        run: |
+          git fetch origin dev
+          CHANGED=$(git diff --name-only HEAD origin/dev -- dist/)
+          echo "changed_files=$CHANGED" >> $GITHUB_OUTPUT
 
       - name: Deploy to S3
         if: steps.changes.outputs.changed_files != ''
